@@ -89,7 +89,9 @@ It is incumbent upon you to initialise a Framework-based project. This is typica
 
 Step into the `ClientApp` directory (`cd ClientApp/`). You will notice that this is an empty folder. It is within this folder that you should initialise the project.
 
-Take a look a look at this mock-up ![](readme_images/mockups.png "Mockup Image")
+##### Take a look a look at this mock-up
+ 
+![](readme_images/mockups.png "Mockup Image")
 
 ## Application Requirements
 
