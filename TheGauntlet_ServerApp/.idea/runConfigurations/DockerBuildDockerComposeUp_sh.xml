@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="DockerBuildDockerComposeUp.sh" type="BashConfigurationType" factoryName="Bash">
+    <option name="INTERPRETER_OPTIONS" value="bash" />
+    <option name="INTERPRETER_PATH" value="/usr/bin/env" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/docker" />
+    <option name="PARENT_ENVS" value="true" />
+    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/docker/DockerBuildDockerComposeUp.sh" />
+    <option name="PARAMETERS" value="" />
+    <module name="template-ts-nodejs-express-mongoose-micro-service" />
+    <envs />
+    <method />
+  </configuration>
+</component>
