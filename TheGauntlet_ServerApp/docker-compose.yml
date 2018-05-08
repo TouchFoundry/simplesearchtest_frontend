@@ -7,10 +7,10 @@ services:
     ports:
       - "27017:27017"
 
-  simpleSearchService:
+  gauntletService:
     depends_on:
       - db
-    image: tf/simple-search-test-service:latest
+    image: tf/the-gauntlet-service:latest
     ports:
       - "4895:4895" #access the service via localhost:4895 when run on your local machine
       - "127.0.0.1:5858:5858" #for debugging

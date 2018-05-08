@@ -1,6 +1,6 @@
 "use strict";
-import {SimpleSearchService} from "./service";
+import {GauntletService} from "./service";
 
 //entry point
-let simpleSearchService: SimpleSearchService = new SimpleSearchService();
-simpleSearchService.start();
+let gauntletService: GauntletService = new GauntletService();
+gauntletService.start();

@@ -6,7 +6,7 @@ import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 import {suite, test} from "mocha-typescript";
 import {Response} from "../models";
-import {SimpleSearchService} from "../service";
+import {GauntletService} from "../service";
 import {Config} from "../shared";
 import chaiHttp = require('chai-http');
 
@@ -16,10 +16,10 @@ chai.use(chaiHttp);
 
 @suite('Service Main Class')
 class MainAppTest {
-    private static templateService: SimpleSearchService;
+    private static templateService: GauntletService;
 
     static before() {
-        this.templateService = new SimpleSearchService(true, !!process.env.TEST_HAS_DB);
+        this.templateService = new GauntletService(true, !!process.env.TEST_HAS_DB);
         this.templateService.start();
     }
 

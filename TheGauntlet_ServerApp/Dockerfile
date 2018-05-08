@@ -1,6 +1,6 @@
 # How to use this file (not related to the test, but nice to know :))
-# build using :             docker build -t tf/simple-search-test-service -f Dockerfile .
-# run using :               docker run -d -v src:/usr/src/src tf/simple-search-test-service
+# build using :             docker build -t tf/the-gauntlet-service -f Dockerfile .
+# run using :               docker run -d -v src:/usr/src/src tf/the-gauntlet-service
 
 FROM node:8.9.4-alpine
 

@@ -1,4 +1,4 @@
-# TF SimpleSearchTest Service #
+# TF The Gauntlet Service #
 
 Micro-service that provides test results for the Client App
 

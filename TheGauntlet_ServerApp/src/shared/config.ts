@@ -14,7 +14,7 @@ export const Config = {
     },
     dbSettings: {
         connectionString: process.env.MONGO_DB_HOST || 'mongodb://localhost:27017',
-        database: 'simpleSearchDB',
+        database: 'statesDB',
         replicaSet: 'rs0'
     }
 };

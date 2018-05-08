@@ -1,4 +1,4 @@
 apps:
   - script   : 'app.js'
-    name     : 'simple-search-test-service'
+    name     : 'the-gauntlet-service'
     node_args:  '--inspect=0.0.0.0:5858'

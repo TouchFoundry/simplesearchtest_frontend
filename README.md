@@ -1,4 +1,4 @@
-# SimpleSearchTest
+# The Gauntlet
 
 Welcome! Congratulations on making our shortlist! Below you will find a task that will put your skills to the test. Good luck.
 
@@ -106,7 +106,7 @@ Step into the `ClientApp` directory (`cd ClientApp/`). You will notice that this
     * This should be the page that is landed on first when accessing the base URL of the app
     * it should have a header & a list of American States
 4. Header Component
-    * Should display the text Simple Search Test on the landing page
+    * Should display the text The Gauntlet on the landing page
     * Should include the State name on the State page
     * Re-use of this component will be rewarded
 5. A List Component

@@ -4,7 +4,7 @@
 
 cd ..
 
-docker build -t tf/simple-search-test-service -f Dockerfile .
+docker build -t tf/the-gauntlet-service -f Dockerfile .
 
 docker-compose up -d
 

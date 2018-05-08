@@ -1,7 +1,7 @@
 {
-  "name": "simple-search-test-service",
+  "name": "the-gauntlet-service",
   "version": "1.0.0",
-  "description": "An API service providing data for the SimpleSearchTest ClientApp",
+  "description": "An API service providing data for The Gauntlet ClientApp",
   "main": "dist/app.js",
   "scripts": {
     "build": "gulp",

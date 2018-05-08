@@ -15,7 +15,7 @@ import {StateSeedModule} from "./modules";
 global.Promise = require('bluebird');
 mongoose.Promise = global.Promise;
 
-export class SimpleSearchService {
+export class GauntletService {
     private pkg = require("../package.json");
     private winston: Winston = require('winston');
 
@@ -180,8 +180,8 @@ export class SimpleSearchService {
             res.send("A blank request? Good one...");
         });
 
-        let simpleSearchRoutes: StateRoutes = new StateRoutes(this.winston);
-        this.app.use(Config.apiSettings.baseApiUri, simpleSearchRoutes.getRoutes());
+        let stateRoutes: StateRoutes = new StateRoutes(this.winston);
+        this.app.use(Config.apiSettings.baseApiUri, stateRoutes.getRoutes());
 
         this.winston.info("Express running on http://localhost:" + Config.apiSettings.port);
     }
