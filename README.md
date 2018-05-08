@@ -114,6 +114,7 @@ Step into the `ClientApp` directory (`cd ClientApp/`). You will notice that this
     * Use of a loading spinner will be rewarded, even though we are working locally :)
     * Each item should be clickable. Upon clicking an item, the user should be routed to the "State Page"
 6. State Page (Component) - URL: `http://locahost:1234/:stateId`
+    * Your router should lead you here. The State ID (which is a MongoDB id) should be the URL Parameter
     * Should have the same Header Component used on the Landing Page
     * Should have the current State name in the header, appended to the original title
     * An IFrame component should be created. It should load the Wikipedia page associated to the state 
@@ -139,5 +140,9 @@ Completing this test will help us understand to what degree you satisfy the foll
 1. Aptitude, can you accomplish the task set forth using the Power of the Internet?
 2. Precision, can you edit just what needs to be edited in order to accomplish your goals?
 3. Attention, can you follow the guide set forth by the architect?
+
+## Who to ask for help
+
+* [Luke Johnstone luke@touchfoundry.co.za](mailto:luke@touchfoundry.co.za)
 
 # Good luck & thanks!
