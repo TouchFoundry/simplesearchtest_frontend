@@ -1,4 +1,4 @@
-# TODO CHANGE ME
+# How to use this file (not related to the test, but nice to know :))
 # build using :             docker build -t tf/simple-search-test-service -f Dockerfile .
 # run using :               docker run -d -v src:/usr/src/src tf/simple-search-test-service
 

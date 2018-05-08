@@ -1,34 +1,19 @@
-# todo change this
-# create network using: docker network create --subnet=172.1.0.0/16 tf-local
-
 version: '3'
 
 services:
   db:
-    image: mongo:3.6.2
-    volumes:
-      - ~/docker_volumes/simple-search-test-service/mongo:/data/db
+    image: mongo:3.4.5
     restart: always
-    networks:
-      tfLocal:
-        ipv4_address: 172.1.0.2
+    ports:
+      - "27017:27017"
 
-  serviceName:
+  simpleSearchService:
     depends_on:
       - db
     image: tf/simple-search-test-service:latest
     ports:
-      - "4895:4895"
-      - "127.0.0.1:5858:5858"
+      - "4895:4895" #access the service via localhost:4895 when run on your local machine
+      - "127.0.0.1:5858:5858" #for debugging
     restart: always
     environment:
       MONGO_DB_HOST: db:27017
-#      USES_REPLICA: "true"
-    networks:
-      tfLocal:
-        ipv4_address: 172.1.0.3
-
-networks:
-  tfLocal:
-    external:
-      name: tf-local #todo change this

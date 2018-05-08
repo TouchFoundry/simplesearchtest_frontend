@@ -1,6 +1,6 @@
 "use strict";
-import {TemplateService} from "./service";
+import {SimpleSearchService} from "./service";
 
 //entry point
-let templateService: TemplateService = new TemplateService();
-templateService.start();
+let simpleSearchService: SimpleSearchService = new SimpleSearchService();
+simpleSearchService.start();

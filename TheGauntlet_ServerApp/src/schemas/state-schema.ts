@@ -7,7 +7,7 @@ import DateTimeFormatOptions = Intl.DateTimeFormatOptions;
 
 mongoose.Promise = global.Promise;
 
-export const ExampleSchema = new Schema({
+export const StateSchema = new Schema({
     exampleAttr1: String,
     exampleAttr2: String,
     exampleAttr3: String,

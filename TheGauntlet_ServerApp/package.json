@@ -1,12 +1,11 @@
 {
   "name": "simple-search-test-service",
   "version": "1.0.0",
-  "description": "",
+  "description": "An API service providing data for the SimpleSearchTest ClientApp",
   "main": "dist/app.js",
   "scripts": {
-    "test": "mocha --require ts-node/register **/*.spec.ts",
     "build": "gulp",
-    "start": "gulp && cd dist/ && node --debug=8990 app.js"
+    "start": "gulp && cd dist/ && node --debug=5858 app.js"
   },
   "repository": {
     "type": "git",

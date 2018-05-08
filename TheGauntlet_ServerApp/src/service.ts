@@ -8,13 +8,13 @@ import moment = require('moment');
 
 import mongoose = require('mongoose');
 import {Config} from "./shared";
-import {ExampleRoutes, HealthCheckRoutes} from "./routes";
+import {StateRoutes, HealthCheckRoutes} from "./routes";
 import {Winston} from "winston";
 
 global.Promise = require('bluebird');
 mongoose.Promise = global.Promise;
 
-export class TemplateService {
+export class SimpleSearchService {
     private pkg = require("../package.json");
     private winston: Winston = require('winston');
 
@@ -177,9 +177,8 @@ export class TemplateService {
             res.send("A blank request? Good one...");
         });
 
-        //todo: add your routes here
-        let exampleRoutes: ExampleRoutes = new ExampleRoutes(this.winston);
-        this.app.use(Config.apiSettings.baseApiUri, exampleRoutes.getRoutes());
+        let simpleSearchRoutes: StateRoutes = new StateRoutes(this.winston);
+        this.app.use(Config.apiSettings.baseApiUri, simpleSearchRoutes.getRoutes());
 
         this.winston.info("Express running on http://localhost:" + Config.apiSettings.port);
     }
@@ -192,6 +191,5 @@ export class TemplateService {
     }
 
     private startSubModules() {
-        //todo: register sub-modules here -> use these to run tasks on the side. Keep it light, remember the JS Event loop
     }
 }

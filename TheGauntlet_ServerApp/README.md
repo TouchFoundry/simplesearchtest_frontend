@@ -28,13 +28,8 @@ Micro-service that provides test results for the Client App
 
 * Clone
 * `npm install` so that your IDE has the definitions for the dependencies
-* `cd docker && ./DockerBuildDockerComposeUp.sh` will build the docker image. Alternatively, you could just run `docker-compose up -d`. **Note: This only spins up the backend server, you need to work out your own way to locally host your ClientApp** 
-
-### Contribution guidelines ###
-
-* Breaking features should be build in separate branches from `master`
-* Luke periodically reviews code, you are welcome to review and suggest improvements at any time :smile:
+* `DockerBuildDockerComposeUp.sh` will build the docker image & run use docker-compose to host it locally. Alternatively, you could just run `docker-compose up -d`. **Note: This only spins up the backend server, you need to work out your own way to locally host your ClientApp** 
 
 ### Who do I talk to? ###
 
-* Luke Johnstone
+* Luke Johnstone [TouchFoundry]

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+#RUN ME!!!! :) this will spin up the server
+
 cd ..
 
 docker build -t tf/simple-search-test-service -f Dockerfile .
