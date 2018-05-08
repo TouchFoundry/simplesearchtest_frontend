@@ -1,7 +1,8 @@
 /**
  * Created by lukejohnstone on 2017/05/24.
  */
-export * from "./example-interface";
+export * from "./state.interface";
+export * from "./state-base.interface";
 
 
 

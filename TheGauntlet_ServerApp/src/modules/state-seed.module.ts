@@ -1,97 +1,218 @@
 import {Winston} from "winston";
-import * as Bull from "bull";
-import {Job, JobOptions} from "bull";
-import {Config, Constants} from "../shared";
-import {SettingSchema} from "../schemas";
-import {model} from "mongoose";
-import {ProductDataClientRpcModule} from "./product-data-client-rpc.module";
-import {ISetting, ISettingsSyncRpcResponse} from "../interfaces";
-import {SettingRpcResponse} from "../models/rpc";
-import * as _ from "lodash";
-import moment = require("moment");
+import {Schema} from "../shared";
 
-export class SettingSeedModule {
-    private SettingModel = model('Setting', SettingSchema);
-
-    private settingSeedQueueOptions: Bull.QueueOptions = {
-        redis: {
-            host: Config.bull.redis.host,
-            port: Number.parseInt(Config.bull.redis.port)
-        }
-    };
-
-    private settingSeedQueue: Bull.Queue;
-
-    constructor(private winston: Winston, private testMode: boolean = false, private productDataClientRpcModule: ProductDataClientRpcModule) {
-        if (process.env.DO_SEED_SETTINGS && !testMode) {
-            this.settingSeedQueue = new Bull(Config.bull.queues.settingSeed.name, this.settingSeedQueueOptions);
-            this.settingSeedQueue.process((job) => this.doSeedProcess(job));
-            this.settingSeedQueue.resume().then(() => this.winston.info('Settings seed queue started'));
-
-            this.addSeedJob();
+export class StateSeedModule {
+    constructor(private winston: Winston,) {
+        if (process.env.DO_SEED) {
+            this.doSeed();
         }
     }
 
-    private doSeedProcess(job: Job) {
-        return new Promise<ISettingsSyncRpcResponse>((resolve, reject) => {
-            let time = moment().format('X');
-
-            this.SettingModel.findOneAndUpdate({key: Constants.settingNames.storeOpening}, {
-                key: Constants.settingNames.storeOpening,
-                value: Config.serviceSettings.settingsDefaultValues.storeOpening,
-                lastUpdated: time,
-                updatedBy: "SEEDED",
-                active: true
-            }, {upsert: true}).then(() => job.progress(5).then(() => this.SettingModel.findOneAndUpdate({key: Constants.settingNames.storeClosing}, {
-                key: Constants.settingNames.storeClosing,
-                value: Config.serviceSettings.settingsDefaultValues.storeClosing,
-                lastUpdated: time,
-                updatedBy: "SEEDED",
-                active: true
-            }, {upsert: true}).then(() => job.progress(10).then(() => this.SettingModel.findOneAndUpdate({key: Constants.settingNames.alcoholOpening}, {
-                key: Constants.settingNames.alcoholOpening,
-                value: Config.serviceSettings.settingsDefaultValues.alcoholOpening,
-                lastUpdated: time,
-                updatedBy: "SEEDED",
-                active: true
-            }, {upsert: true}).then(() => job.progress(15).then(() => this.SettingModel.findOneAndUpdate({key: Constants.settingNames.alcoholClosing}, {
-                key: Constants.settingNames.alcoholClosing,
-                value: Config.serviceSettings.settingsDefaultValues.alcoholClosing,
-                lastUpdated: time,
-                updatedBy: "SEEDED",
-                active: true
-            }, {upsert: true}).then(() => job.progress(40).then(() => {
-                this.winston.info("Successfully seeded settings");
-                this.SettingModel.find({
-                    active: true,
-                    updatedBy: "SEEDED",
-                    lastUpdated: time
-                }).then((settings: ISetting[]) => job.progress(75).then(() => {
-                    this.winston.info("updating user product service");
-                    this.productDataClientRpcModule.doSyncSettings({
-                        settings: _.map(settings, setting => new SettingRpcResponse(setting))
-                    }).then(() => job.progress(100).then(() => resolve({
-                        success: true
-                    }))).catch(error => reject(error));
-                })).catch(error => reject(error));
-            })).catch(error => reject(error)))).catch(error => reject(error)))).catch(error => reject(error)))).catch(error => reject(error));
-        });
-    }
-
-    private addSeedJob() {
-        let jobOpts: JobOptions = {
-            attempts: Config.bull.queues.settingSeed.maxRetries,
-            backoff: Config.bull.queues.settingSeed.backoffPeriod,
-            delay: Config.bull.queues.settingSeed.initDelay,
-            timeout: Config.bull.queues.settingSeed.timeout
-        };
-
-        this.settingSeedQueue.add({}, jobOpts)
-            .then((job) => this.winston.info('Added setting seed job', {
-                job: job.id
-            }))
-            .catch(error => this.winston.error('Unable to add setting seed job', {
-                error: error
-            }));
+    private doSeed() {
+        Schema.StateModel.deleteMany({}).then(() => {
+            this.winston.info("Purged existing states");
+            Schema.StateModel.insertMany([
+                {
+                    name: "Alabama",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Alabama"
+                },
+                {
+                    name: "Alaska",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Alaska"
+                },
+                {
+                    name: "Arizona",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Arizona"
+                },
+                {
+                    name: "Arkansas",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Arkansas"
+                },
+                {
+                    name: "California",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/California"
+                },
+                {
+                    name: "Colorado",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Colorado"
+                },
+                {
+                    name: "Connecticut",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Connecticut"
+                },
+                {
+                    name: "Delaware",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Delaware"
+                },
+                {
+                    name: "Florida",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Florida"
+                },
+                {
+                    name: "Georgia",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Georgia"
+                },
+                {
+                    name: "Hawaii",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Hawaii"
+                },
+                {
+                    name: "Idaho",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Idaho"
+                },
+                {
+                    name: "Illinois",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Illinois"
+                },
+                {
+                    name: "Indiana",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Indiana"
+                },
+                {
+                    name: "Iowa",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Iowa"
+                },
+                {
+                    name: "Kansas",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Kansas"
+                },
+                {
+                    name: "Kentucky",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Kentucky"
+                },
+                {
+                    name: "Louisiana",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Louisiana"
+                },
+                {
+                    name: "Maine",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Maine"
+                },
+                {
+                    name: "Maryland",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Maryland"
+                },
+                {
+                    name: "Massachusetts",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Massachusetts"
+                },
+                {
+                    name: "Michigan",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Michigan"
+                },
+                {
+                    name: "Minnesota",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Minnesota"
+                },
+                {
+                    name: "Mississippi",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Mississippi"
+                },
+                {
+                    name: "Missouri",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Missouri"
+                },
+                {
+                    name: "Montana",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Montana"
+                },
+                {
+                    name: "Nebraska",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Nebraska"
+                },
+                {
+                    name: "Nevada",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Nevada"
+                },
+                {
+                    name: "New Hampshire",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/New_Hampshire"
+                },
+                {
+                    name: "New Jersey",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/New_Jersey"
+                },
+                {
+                    name: "New Mexico",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/New_Mexico"
+                },
+                {
+                    name: "New York",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/New_York"
+                },
+                {
+                    name: "North Carolina",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/North_Carolina"
+                },
+                {
+                    name: "North Dakota",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/North_Dakota"
+                },
+                {
+                    name: "Ohio",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Ohio"
+                },
+                {
+                    name: "Oklahoma",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Oklahoma"
+                },
+                {
+                    name: "Oregon",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Oregon"
+                },
+                {
+                    name: "Pennsylvania",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Pennsylvania"
+                },
+                {
+                    name: "Rhode Island",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Rhode_Island"
+                },
+                {
+                    name: "South Carolina",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/South_Carolina"
+                },
+                {
+                    name: "South Dakota",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/South_Dakota"
+                },
+                {
+                    name: "Tennessee",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Tennessee"
+                },
+                {
+                    name: "Texas",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Texas"
+                },
+                {
+                    name: "Utah",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Utah"
+                },
+                {
+                    name: "Vermont",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Vermont"
+                },
+                {
+                    name: "Virginia",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Virginia"
+                },
+                {
+                    name: "Washington",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Washington"
+                },
+                {
+                    name: "West Virginia",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/West_Virginia"
+                },
+                {
+                    name: "Wisconsin",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Wisconsin"
+                },
+                {
+                    name: "Wyoming",
+                    wikipediaUrl: "https://en.wikipedia.org/wiki/Wyoming"
+                }
+            ]).then(() => this.winston.info("Successfully seeded DB")).catch(() => this.winston.error("Unable to seed database"));
+        }).catch(() => this.winston.error("Unable to purge existing states"));
     }
 }

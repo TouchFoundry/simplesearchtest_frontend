@@ -10,6 +10,7 @@ import mongoose = require('mongoose');
 import {Config} from "./shared";
 import {StateRoutes, HealthCheckRoutes} from "./routes";
 import {Winston} from "winston";
+import {StateSeedModule} from "./modules";
 
 global.Promise = require('bluebird');
 mongoose.Promise = global.Promise;
@@ -28,6 +29,8 @@ export class SimpleSearchService {
     //endregion
 
     //region sub-module definitions
+
+    private stateSeedModule: StateSeedModule;
 
     //endregion
 
@@ -191,5 +194,6 @@ export class SimpleSearchService {
     }
 
     private startSubModules() {
+        this.stateSeedModule = new StateSeedModule(this.winston);
     }
 }

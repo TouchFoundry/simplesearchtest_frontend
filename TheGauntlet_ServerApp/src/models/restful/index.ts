@@ -4,3 +4,4 @@
 export * from './response';
 export * from './failure';
 export * from './success';
+export * from "./state-response.model";
