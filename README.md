@@ -95,7 +95,7 @@ Step into the `ClientApp` directory (`cd ClientApp/`). You will notice that this
 
 ## Application Requirements
 
-1. A "data service" that make HTTP calls to the service you should be running locally. 
+1. A "data service" that makes HTTP calls to the service you should be running locally. 
     * You should expose methods to your components, such as `getStates` for your list
     * Never call APIs directly from components (decoupling)
     * Use of Observables will be rewarded
@@ -117,7 +117,10 @@ Step into the `ClientApp` directory (`cd ClientApp/`). You will notice that this
     * Your router should lead you here. The State ID (which is a MongoDB id) should be the URL Parameter
     * Should have the same Header Component used on the Landing Page
     * Should have the current State name in the header, appended to the original title
-    * An IFrame component should be created. It should load the Wikipedia page associated to the state 
+    * An IFrame component should be created. It should load the Wikipedia page associated to the state
+7. Stying
+    * you may apply a CSS framework if you wish, points will be awarded for a pleasant looking presentation
+    * use of a preprocessor such as SASS or LESS will be rewarded 
     
 Port number used here are just examples, your app can be hosted on any port you choose. 
 
@@ -140,6 +143,7 @@ Completing this test will help us understand to what degree you satisfy the foll
 1. Aptitude, can you accomplish the task set forth using the Power of the Internet?
 2. Precision, can you edit just what needs to be edited in order to accomplish your goals?
 3. Attention, can you follow the guide set forth by the architect?
+4. Communication and expectation management, for us, should you be on course to default on your allotted timeframe along with outlining any hurdles that arise
 
 ## Who to ask for help
 

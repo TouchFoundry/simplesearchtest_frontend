@@ -1,5 +1,7 @@
 # TF The Gauntlet Service #
 
+NB NB NB!!! This readme is just for the backend service that you should host locally and connect your app to.
+
 Micro-service that provides test results for the Client App
 
 ### What is this repository for? ###
