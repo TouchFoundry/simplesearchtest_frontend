@@ -54,7 +54,7 @@
     "gulp": "3.9.1",
     "gulp-sourcemaps": "2.6.4",
     "gulp-typescript": "4.0.1",
-    "mocha": "3.5.0",
+    "mocha": "10.2.0",
     "mocha-bamboo-reporter": "1.1.1",
     "mocha-typescript": "1.1.12",
     "mochawesome": "3.0.2",
